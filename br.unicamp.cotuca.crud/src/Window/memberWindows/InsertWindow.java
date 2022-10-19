@@ -1,27 +1,32 @@
 package Window.memberWindows;
 import BancoDeDados.daos.*;
 import BancoDeDados.dbos.*;
+import Window.LaunchPage;
 
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
 public class InsertWindow implements ActionListener {
+    LaunchPage launchPage = new LaunchPage();
+    LanguageTexts lt = new LanguageTexts();
+    // lt.teste();
+
     JFrame frame = new JFrame();
     
-    JLabel title_M = new JLabel("Inserir Novo Membro");
+    JLabel title_M = new JLabel(lt.languageBox_Insert.get(0));
     JLabel status_M = new JLabel("Status: ");
     JLabel lbIdMember = new JLabel("IdMember: ");
     JLabel lbIdRocket_M = new JLabel("IdRocket: ");
-    JLabel lbNameMember = new JLabel("Member Name: ");
+    JLabel lbNameMember = new JLabel("MemberName: ");
     
     JTextField txtIdMember = new JTextField();
     JTextField txtIdRocket_M = new JTextField();
     JTextField txtMemberName = new JTextField();
 
-    JButton btnGetInserted_M = new JButton("Insert values");
+    JButton btnGetInserted_M = new JButton(lt.languageBox_Insert.get(1));
 
-    JLabel title_R = new JLabel("Inserir Novo Foguete");
+    JLabel title_R = new JLabel(lt.languageBox_Insert.get(2));
     JLabel status_R = new JLabel("Status: "); 
     JLabel lbIdRocket_R = new JLabel("IdRocket: ");
     JLabel lbRocketName = new JLabel("Rocket Name: ");
@@ -29,12 +34,13 @@ public class InsertWindow implements ActionListener {
     JTextField txtIdRocket_R = new JTextField();
     JTextField txtRocketName = new JTextField();
 
-    JButton btnGetInserted_R = new JButton("Insert values");
+    JButton btnGetInserted_R = new JButton(lt.languageBox_Insert.get(1));
 
 
     
     public InsertWindow() {
         
+        launchPage.getLanguageSelected();
         /* FIRST ROW: MEMBER*/
         title_M.setBounds(10, 5, 350, 30);
         title_M.setFont(new Font("Serif", Font.BOLD, 22));
@@ -131,19 +137,19 @@ public class InsertWindow implements ActionListener {
             try {
                 
                 if (Integer.parseInt(txtIdMember.getText()) <= Members.getLength()) 
-                    throw new Exception("<html>O ID inserido já existe." + "<br>" +" O próximo ID deve ser de "+(Members.getLength() + 1) + "</html>");
+                    throw new Exception("<html>" + lt.languageBox_Insert.get(3) + (Members.getLength() + 1) + "</html>");
                     
                 if (Integer.parseInt(txtIdMember.getText()) != Members.getLength() + 1) 
-                    throw new Exception("<html>O valor inserido é inválido." + "<br>" +" O próximo ID deve ser de "+(Members.getLength() + 1) + "</html>");
+                    throw new Exception("<html>" + lt.languageBox_Insert.get(4) + (Members.getLength() + 1) + "</html>");
                 
                     
                 Members.insertMember (new Member (Integer.parseInt(txtIdMember.getText()), 
                                                   Integer.parseInt(txtIdRocket_M.getText()), 
                                                   txtMemberName.getText()));
-                status_M.setText("Status: Member inserido com sucesso!");
+                status_M.setText(lt.languageBox_Insert.get(5));
             }
             catch (Exception erro) {
-                status_M.setText("<html>Erro: "+ erro.getMessage() + "</html>");
+                status_M.setText("<html>" + erro.getMessage() + "</html>");
 
             }
 
@@ -151,15 +157,15 @@ public class InsertWindow implements ActionListener {
         else if (e.getSource() == btnGetInserted_R) {
             try {
                 if(Integer.parseInt(txtIdRocket_R.getText()) <= Rockets.getLength())
-                    throw new Exception("<html>O ID inserido já existe." + "<br>" +" O próximo ID deve ser de "+(Rockets.getLength() + 1) + "</html>");
+                    throw new Exception("<html>" + lt.languageBox_Insert.get(3) + (Rockets.getLength() + 1) + "</html>");
                 if(Integer.parseInt(txtIdRocket_R.getText())!= Rockets.getLength() + 1)
                     throw new Exception("<html>O valor inserido é inválido." + "<br>" +" O próximo ID deve ser de "+(Rockets.getLength() + 1) + "</html>");
                 Rockets.insertRocket(new Rocket(Integer.parseInt(txtIdRocket_R.getText()), txtRocketName.getText()));
-                status_R.setText("Status: Rocket inserido com sucesso!");
+                status_R.setText(lt.languageBox_Insert.get(6));
 
             } 
             catch (Exception erro) {
-                status_R.setText("<html>Erro: "+ erro.getMessage() + "</html>");
+                status_R.setText("<html>" + erro.getMessage() + "</html>");
             }
         }
     }
