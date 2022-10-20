@@ -7,8 +7,9 @@ import javax.swing.*;
 
 public class LaunchPage implements ActionListener{
     JFrame frame = new JFrame();
-    JComboBox languageBox;
-
+    String[] languages = {"Portugues", "English", "Francais"};
+    JComboBox languageBox = languageBox = new JComboBox(languages);;
+    
     JLabel title = new JLabel("Opções para Tabela");
 
     JButton btnInsert = new JButton("Insert");
@@ -19,20 +20,20 @@ public class LaunchPage implements ActionListener{
     JButton btnShowAll = new JButton("Select * ");
 
 
-    LaunchPage() {
+    public void startWindow() {
         
 
         title.setBounds(30, 5, 350, 30);
         title.setFont(new Font("Serif", Font.BOLD, 22));
-
+    
         btnInsert.setBounds(50, 40, 100, 40);
         btnInsert.setFocusable(false);
         btnInsert.addActionListener(this);
-
+    
         btnDelete.setBounds(155, 40, 100, 40);
         btnDelete.setFocusable(false);
         btnDelete.addActionListener(this);
-
+    
         btnAlter.setBounds(260, 40, 100, 40);
         btnAlter.setFocusable(false);
         btnAlter.addActionListener(this);
@@ -44,21 +45,20 @@ public class LaunchPage implements ActionListener{
         btnShowAll.setBounds(210, 85, 100, 40);
         btnShowAll.setFocusable(false);
         btnShowAll.addActionListener(this);
-
-        String[] languages = {"Portugues", "English", "Francais"};
-        languageBox = new JComboBox(languages);
+    
+        
         languageBox.setBounds(50, 150, 110, 25);
         languageBox.addActionListener(this);
-
+    
         frame.add(title);
-
+    
         frame.add(btnInsert);
         frame.add(btnDelete);
         frame.add(btnAlter);
         frame.add(btnShowMember);
         frame.add(btnShowAll);
         frame.add(languageBox);
-
+    
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(420, 250);
         frame.setLayout(null);

@@ -1,6 +1,9 @@
 package Window.memberWindows;
+
 import BancoDeDados.daos.*;
 import BancoDeDados.dbos.*;
+import Window.LaunchPage;
+import Window.TextLanguages;
 
 import java.awt.event.*;
 import java.awt.*;
@@ -8,8 +11,10 @@ import javax.swing.*;
 
 public class InsertWindow implements ActionListener {
     JFrame frame = new JFrame();
+
+    TextLanguages lt = new TextLanguages();
     
-    JLabel title_M = new JLabel("Inserir Novo Membro");
+    JLabel title_M;
     JLabel status_M = new JLabel("Status: ");
     JLabel lbIdMember = new JLabel("IdMember: ");
     JLabel lbIdRocket_M = new JLabel("IdRocket: ");
@@ -19,9 +24,9 @@ public class InsertWindow implements ActionListener {
     JTextField txtIdRocket_M = new JTextField();
     JTextField txtMemberName = new JTextField();
 
-    JButton btnGetInserted_M = new JButton("Insert values");
+    JButton btnGetInserted_M;
 
-    JLabel title_R = new JLabel("Inserir Novo Foguete");
+    JLabel title_R;
     JLabel status_R = new JLabel("Status: "); 
     JLabel lbIdRocket_R = new JLabel("IdRocket: ");
     JLabel lbRocketName = new JLabel("Rocket Name: ");
@@ -29,12 +34,20 @@ public class InsertWindow implements ActionListener {
     JTextField txtIdRocket_R = new JTextField();
     JTextField txtRocketName = new JTextField();
 
-    JButton btnGetInserted_R = new JButton("Insert values");
+    JButton btnGetInserted_R;
 
 
     
     public InsertWindow() {
-        
+        String languageSelected = new LaunchPage().getLanguageSelected();
+        lt.getLanguageSelected(languageSelected);
+
+        /* TEXT DEFINITION */
+        title_M = new JLabel((String)lt.languageBox_Insert[0]);
+        btnGetInserted_M = new JButton("Insert values");
+        title_R = new JLabel("Inserir Novo Foguete");
+        btnGetInserted_R = new JButton("Insert values");
+
         /* FIRST ROW: MEMBER*/
         title_M.setBounds(10, 5, 350, 30);
         title_M.setFont(new Font("Serif", Font.BOLD, 22));

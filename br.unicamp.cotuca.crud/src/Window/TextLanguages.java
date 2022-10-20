@@ -7,34 +7,64 @@ import java.util.ArrayList;
 
 public class TextLanguages {
     
-    String[] portugueseBox_Insert = {"Inserir novo Membro", 
+
+    public String[] portugueseBox_Insert = {"Inserir novo Membro", 
                                      "Inserir valores",
                                      "Inserir novo Foguete",
                                      "Erro: O ID inserido já existe." + "<br>" +" O próximo ID deve ser de ",
-                                     "Erro: O valor inserido é inválido." + "<br>" +" O próximo ID deve ser de ",
+                                     "Erro: O ID inserido é inválido." + "<br>" +" O próximo ID deve ser de ",
                                      "Status: Member inserido com sucesso!",
                                      "Status: Rocket inserido com sucesso!" }; 
     String[] portugueseBox_Alter = {};
     String[] portugueseBox_Delete = {};
     String[] portugueseBox_Select = {};
 
-    // String[] languageBox_Insert = {};
-    ArrayList<String> languageBox_Insert = new ArrayList<String>(10);
-    // this.teste();
+    public String[] englishBox_Insert = {"Insert new Member", 
+                                     "Insert values",
+                                     "Insert new Rocket",
+                                     "Error: The inserted ID already exists" + "<br>" +" Next ID must be ",
+                                     "Error: ID inserted is not valid." + "<br>" +" Next ID must be ",
+                                     "Status: Member inserted successfully!",
+                                     "Status: Rocket inserted successfully!" }; 
+    String[] englishBox_Alter = {};
+    String[] englishBox_Delete = {};
+    String[] englishBox_Select = {};
+    
+    public String[] languageBox_Insert = new String[20];
+    
 
     public static void main (String[] args) {
         TextLanguages lt = new TextLanguages();
 
         for (int i = 0; i<lt.portugueseBox_Insert.length; i++)
-            lt.languageBox_Insert.add(lt.portugueseBox_Insert[i]);
+            lt.languageBox_Insert[i] = lt.portugueseBox_Insert[i];
 
-        for (int c = 0; c< lt.languageBox_Insert.size(); c++)
-            System.out.println(lt.languageBox_Insert.get(c));
+        for (int c = 0; c< lt.languageBox_Insert.length; c++)
+            System.out.println(lt.languageBox_Insert[c]);
     }
-    public void teste() {
-        TextLanguages lt = new TextLanguages();
 
-        for (int i = 0; i<lt.portugueseBox_Insert.length; i++)
-            lt.languageBox_Insert.add(lt.portugueseBox_Insert[i]);
+    // RUNNING 
+    public void getLanguageSelected(String languageSelected) {
+        System.out.println("Got in the method");
+        if (languageSelected == "Portugues") {
+            for (int i = 0; i < portugueseBox_Insert.length; i++) {
+                languageBox_Insert[i] = portugueseBox_Insert[i];
+                System.out.println(languageBox_Insert[i]);
+            }
+        }
+        
+        if (languageSelected == "English") {
+            for (int i = 0; i < englishBox_Insert.length; i++) {
+                languageBox_Insert[i] = englishBox_Insert[i];
+                System.out.println(languageBox_Insert[i]);
+            }
+            System.out.println("-----------> Has entered English");
+
+        }
+        else if (languageSelected == "Francais") {
+            System.out.println("Has entered French ");
+
+        }
+
     }
 }
