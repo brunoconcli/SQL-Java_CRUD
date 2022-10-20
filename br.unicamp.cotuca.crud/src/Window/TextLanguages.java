@@ -45,15 +45,16 @@ public class TextLanguages {
 
     // RUNNING 
     public void getLanguageSelected(String languageSelected) {
-        System.out.println("Got in the method");
         if (languageSelected == "Portugues") {
             for (int i = 0; i < portugueseBox_Insert.length; i++) {
                 languageBox_Insert[i] = portugueseBox_Insert[i];
                 System.out.println(languageBox_Insert[i]);
+
             }
+            System.out.println("Got in the method");
         }
         
-        if (languageSelected == "English") {
+        else if (languageSelected == "English") {
             for (int i = 0; i < englishBox_Insert.length; i++) {
                 languageBox_Insert[i] = englishBox_Insert[i];
                 System.out.println(languageBox_Insert[i]);

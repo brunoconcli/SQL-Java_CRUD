@@ -36,10 +36,11 @@ public class InsertWindow implements ActionListener {
 
     JButton btnGetInserted_R;
 
-
+    String languageSelected;
     
     public InsertWindow() {
-        String languageSelected = new LaunchPage().getLanguageSelected();
+        languageSelected = new LaunchPage().getLanguageSelected();
+        System.out.println(languageSelected);
         lt.getLanguageSelected(languageSelected);
 
         /* TEXT DEFINITION */

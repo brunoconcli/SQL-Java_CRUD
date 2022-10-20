@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class LaunchPage implements ActionListener{
     JFrame frame = new JFrame();
-    String[] languages = {"Portugues", "English", "Francais"};
+    String[] languages = {"English", "Portugues", "Francais"};
     JComboBox languageBox = languageBox = new JComboBox(languages);;
     
     JLabel title = new JLabel("Opções para Tabela");
@@ -84,13 +84,19 @@ public class LaunchPage implements ActionListener{
         }
         else if (e.getSource() == languageBox) {
             System.out.println(languageBox.getSelectedItem());
+            // return languageBox.getSelectedItem();
+
         }
     }
     private void handleLocation() { 
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize(); 
         frame.setLocation(((d.width - frame.getWidth())/2), ((d.height - frame.getHeight())/3)); 
     }
+
     public String getLanguageSelected() {
-        return (String)languageBox.getSelectedItem();
+
+        System.out.println((String)languageBox.getSelectedItem());
+        return ((String)languageBox.getSelectedItem());
+
     }
 }
