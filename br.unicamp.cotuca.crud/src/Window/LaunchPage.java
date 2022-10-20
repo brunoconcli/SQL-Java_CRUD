@@ -7,6 +7,7 @@ import javax.swing.*;
 
 public class LaunchPage implements ActionListener{
     JFrame frame = new JFrame();
+    JComboBox languageBox;
 
     JLabel title = new JLabel("Opções para Tabela");
 
@@ -44,6 +45,11 @@ public class LaunchPage implements ActionListener{
         btnShowAll.setFocusable(false);
         btnShowAll.addActionListener(this);
 
+        String[] languages = {"Portugues", "English", "Francais"};
+        languageBox = new JComboBox(languages);
+        languageBox.setBounds(50, 150, 110, 25);
+        languageBox.addActionListener(this);
+
         frame.add(title);
 
         frame.add(btnInsert);
@@ -51,9 +57,10 @@ public class LaunchPage implements ActionListener{
         frame.add(btnAlter);
         frame.add(btnShowMember);
         frame.add(btnShowAll);
+        frame.add(languageBox);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(420, 200);
+        frame.setSize(420, 250);
         frame.setLayout(null);
         frame.setVisible(true);
         handleLocation();
@@ -75,10 +82,15 @@ public class LaunchPage implements ActionListener{
         else if(e.getSource() == btnShowAll) {
             new SelectAllWindow();
         }
+        else if (e.getSource() == languageBox) {
+            System.out.println(languageBox.getSelectedItem());
+        }
     }
     private void handleLocation() { 
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize(); 
         frame.setLocation(((d.width - frame.getWidth())/2), ((d.height - frame.getHeight())/3)); 
     }
-
+    public String getLanguageSelected() {
+        return (String)languageBox.getSelectedItem();
+    }
 }
