@@ -18,6 +18,12 @@ public class TextLanguages {
     String[] portugueseBox_Alter = {};
     String[] portugueseBox_Delete = {};
     String[] portugueseBox_Select = {};
+    String[] portugueseBox_LaunchPage = {"Opções para Tabela", 
+                                        "Inserir", 
+                                        "Deletar", 
+                                        "Alterar",
+                                        "Selecionar ID", 
+                                        "Selecionar *"};
 
     public String[] englishBox_Insert = {"Insert new Member", 
                                      "Insert values",
@@ -29,43 +35,56 @@ public class TextLanguages {
     String[] englishBox_Alter = {};
     String[] englishBox_Delete = {};
     String[] englishBox_Select = {};
+    String[] englishBox_LaunchPage = {"Options for Table", 
+                                    "Insert", 
+                                    "Delete", 
+                                    "Alter",
+                                    "Select ID", 
+                                    "Select *"};
     
     public String[] languageBox_Insert = new String[20];
+    public String[] languageBox_Delete = new String[20];
+    public String[] languageBox_Alter = new String[20];
+    public String[] languageBox_Select = new String[20];
+    public String[] languageBox_LaunchPage = new String[20];
     
 
-    public static void main (String[] args) {
-        TextLanguages lt = new TextLanguages();
+    // public static void main (String[] args) {
+    //     // TextLanguages lt = new TextLanguages();
 
-        for (int i = 0; i<lt.portugueseBox_Insert.length; i++)
-            lt.languageBox_Insert[i] = lt.portugueseBox_Insert[i];
+    //     // for (int i = 0; i<lt.portugueseBox_Insert.length; i++)
+    //     //     lt.languageBox_Insert[i] = lt.portugueseBox_Insert[i];
 
-        for (int c = 0; c< lt.languageBox_Insert.length; c++)
-            System.out.println(lt.languageBox_Insert[c]);
+
+    //     // lt.languageBox_Insert = lt.portugueseBox_Insert;
+    //     // for (int c = 0; c< lt.languageBox_Insert.length; c++)
+    //     //     System.out.println(lt.languageBox_Insert[c]);
+    // }
+
+    public void switchToPortuguese() {
+        languageBox_Insert = portugueseBox_Insert;
+        languageBox_Delete = portugueseBox_Delete;
+        languageBox_Alter = portugueseBox_Alter;
+        languageBox_Select = portugueseBox_Select;
+        languageBox_LaunchPage = portugueseBox_LaunchPage;
+
+        System.out.println("IDIOMA SELECIONADO: PORTUGUES");
     }
 
-    // RUNNING 
-    public void getLanguageSelected(String languageSelected) {
-        if (languageSelected == "Portugues") {
-            for (int i = 0; i < portugueseBox_Insert.length; i++) {
-                languageBox_Insert[i] = portugueseBox_Insert[i];
-                System.out.println(languageBox_Insert[i]);
+    public void switchToEnglish() {
+        languageBox_Insert = englishBox_Insert;
+        languageBox_Delete = englishBox_Delete;
+        languageBox_Alter = englishBox_Alter;
+        languageBox_Select = englishBox_Select;
+        languageBox_LaunchPage = englishBox_LaunchPage;
+        System.out.println("LANGUAGE SELECTED: ENGLISH");
 
-            }
-            System.out.println("Got in the method");
-        }
+    }
+
+    public void switchToFrancais() {
+        System.out.println("LANGUE  SELECIONÉ: FRANÇAIS");
         
-        else if (languageSelected == "English") {
-            for (int i = 0; i < englishBox_Insert.length; i++) {
-                languageBox_Insert[i] = englishBox_Insert[i];
-                System.out.println(languageBox_Insert[i]);
-            }
-            System.out.println("-----------> Has entered English");
-
-        }
-        else if (languageSelected == "Francais") {
-            System.out.println("Has entered French ");
-
-        }
-
     }
+    // RUNNING 
+    
 }

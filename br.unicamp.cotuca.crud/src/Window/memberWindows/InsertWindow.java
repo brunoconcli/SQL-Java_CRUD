@@ -36,18 +36,21 @@ public class InsertWindow implements ActionListener {
 
     JButton btnGetInserted_R;
 
-    String languageSelected;
+    String languageSelected = new LaunchPage().languageSelected;
+    JButton changeLanguage = new JButton("Aqui ó");
     
     public InsertWindow() {
-        languageSelected = new LaunchPage().getLanguageSelected();
-        System.out.println(languageSelected);
-        lt.getLanguageSelected(languageSelected);
+
+        System.out.println(new LaunchPage().switchSelected());
+        System.out.println("Valor instanciado na classe InsertWindow: " + languageSelected + "\n");
+        switchLanguage(languageSelected);
+
 
         /* TEXT DEFINITION */
-        title_M = new JLabel((String)lt.languageBox_Insert[0]);
-        btnGetInserted_M = new JButton("Insert values");
-        title_R = new JLabel("Inserir Novo Foguete");
-        btnGetInserted_R = new JButton("Insert values");
+        title_M = new JLabel(lt.languageBox_Insert[0]);
+        btnGetInserted_M = new JButton(lt.languageBox_Insert[1]);
+        title_R = new JLabel(lt.languageBox_Insert[2]);
+        btnGetInserted_R = new JButton(lt.languageBox_Insert[1]);
 
         /* FIRST ROW: MEMBER*/
         title_M.setBounds(10, 5, 350, 30);
@@ -75,7 +78,11 @@ public class InsertWindow implements ActionListener {
         btnGetInserted_M.setFocusable(false);
         btnGetInserted_M.addActionListener(this);
 
-        
+        changeLanguage.setBounds(200, 70, 50, 25);
+        changeLanguage.setFocusable(false);
+        changeLanguage.addActionListener(this);
+        frame.add(changeLanguage);
+
         frame.add(lbIdMember);
         frame.add(lbIdRocket_M);
         frame.add(lbNameMember);
@@ -164,6 +171,13 @@ public class InsertWindow implements ActionListener {
         }
         else if (e.getSource() == btnGetInserted_R) {
             try {
+
+                title_M.setText(lt.languageBox_Insert[0]);
+                btnGetInserted_M.setText(lt.languageBox_Insert[1]);
+                title_R.setText(lt.languageBox_Insert[2]);
+                btnGetInserted_R.setText(lt.languageBox_Insert[1]);
+
+
                 if(Integer.parseInt(txtIdRocket_R.getText()) <= Rockets.getLength())
                     throw new Exception("<html>O ID inserido já existe." + "<br>" +" O próximo ID deve ser de "+(Rockets.getLength() + 1) + "</html>");
                 if(Integer.parseInt(txtIdRocket_R.getText())!= Rockets.getLength() + 1)
@@ -176,5 +190,44 @@ public class InsertWindow implements ActionListener {
                 status_R.setText("<html>Erro: "+ erro.getMessage() + "</html>");
             }
         }
+        else if (e.getSource() == changeLanguage) {
+            try {
+                languageSelected = "English";
+                switchLanguage(languageSelected);
+                applyText();
+            
+            } catch (Exception erro) {
+                System.out.println("Não pode!");
+            }
+
+        }
+        
+    }
+
+    public void applyText() {
+
+        title_M.setText(lt.languageBox_Insert[0]);
+        btnGetInserted_M.setText(lt.languageBox_Insert[1]);
+        title_R.setText(lt.languageBox_Insert[2]);
+        btnGetInserted_R.setText(lt.languageBox_Insert[1]);
+
+        // for (int i = 0; i < lt.languageBox_LaunchPage.length; i++)
+        //     System.out.println(lt.languageBox_Insert[i]);
+    }
+
+    public void switchLanguage(String languageSelected) {
+        
+        if (languageSelected == "Portugues") 
+            lt.switchToPortuguese();
+
+        else if(languageSelected == "English") 
+            lt.switchToEnglish();
+        
+        else if(languageSelected == "Francais") 
+            lt.switchToFrancais();
+        
+        for (int i = 0; i < lt.languageBox_Insert.length; i++)
+            System.out.println(lt.languageBox_Insert[i]);
+        System.out.println("\n");
     }
 }

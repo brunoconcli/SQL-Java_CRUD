@@ -6,22 +6,36 @@ import javax.swing.*;
 
 
 public class LaunchPage implements ActionListener{
+    TextLanguages lt = new TextLanguages();
     JFrame frame = new JFrame();
-    String[] languages = {"English", "Portugues", "Francais"};
-    JComboBox languageBox = languageBox = new JComboBox(languages);;
+
+    String[] languages = {"Portugues", "English", "Francais"}; // Primeiro idioma: por padrão em português
     
-    JLabel title = new JLabel("Opções para Tabela");
+    public JComboBox languageBox = new JComboBox(languages);
 
-    JButton btnInsert = new JButton("Insert");
-    JButton btnDelete = new JButton("Delete");
-    JButton btnAlter = new JButton("Alter");
+    // public String languageSelected = "English";
+    public String languageSelected = this.getLanguageSelected();
+    JLabel title;
 
-    JButton btnShowMember = new JButton("Select ID");
-    JButton btnShowAll = new JButton("Select * ");
-
-
+    JButton btnInsert;
+    JButton btnDelete;
+    JButton btnAlter;
+    
+    JButton btnShowMember;
+    JButton btnShowAll;
+    
+    
     public void startWindow() {
+        this.switchLanguage(languageSelected);
         
+        title = new JLabel(lt.languageBox_LaunchPage[0]);
+
+        btnInsert = new JButton(lt.languageBox_LaunchPage[1]);
+        btnDelete = new JButton(lt.languageBox_LaunchPage[2]);
+        btnAlter = new JButton(lt.languageBox_LaunchPage[3]);
+        
+        btnShowMember = new JButton(lt.languageBox_LaunchPage[4]);
+        btnShowAll = new JButton(lt.languageBox_LaunchPage[5]);
 
         title.setBounds(30, 5, 350, 30);
         title.setFont(new Font("Serif", Font.BOLD, 22));
@@ -68,7 +82,10 @@ public class LaunchPage implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnInsert) {
+            languageSelected = (String)languageBox.getSelectedItem();
+            System.out.println("\n" + "Valor recebido da classe LaunchPage: " + languageSelected);
             new InsertWindow();
+            
         }
         else if(e.getSource() == btnDelete) {
             new DeleteWindow();
@@ -83,9 +100,17 @@ public class LaunchPage implements ActionListener{
             new SelectAllWindow();
         }
         else if (e.getSource() == languageBox) {
-            System.out.println(languageBox.getSelectedItem());
-            // return languageBox.getSelectedItem();
+            languageSelected = (String)languageBox.getSelectedItem();
+            switchLanguage(languageSelected);
 
+            title.setText(lt.languageBox_LaunchPage[0]);
+
+            btnInsert.setText(lt.languageBox_LaunchPage[1]);
+            btnDelete.setText(lt.languageBox_LaunchPage[2]);
+            btnAlter.setText(lt.languageBox_LaunchPage[3]);
+            
+            btnShowMember.setText(lt.languageBox_LaunchPage[4]);
+            btnShowAll.setText(lt.languageBox_LaunchPage[5]);
         }
     }
     private void handleLocation() { 
@@ -94,9 +119,31 @@ public class LaunchPage implements ActionListener{
     }
 
     public String getLanguageSelected() {
-
-        System.out.println((String)languageBox.getSelectedItem());
         return ((String)languageBox.getSelectedItem());
+    }
 
+    public void switchLanguage(String languageSelected) {
+
+        if (languageSelected == "Portugues") 
+            lt.switchToPortuguese();
+
+        if(languageSelected == "English") 
+            lt.switchToEnglish();
+        
+        if(languageSelected == "Francais") 
+            lt.switchToFrancais();
+        
+    }
+    // USELESS
+    public String switchSelected () {
+        if (languageBox.getSelectedItem() == "Portugues") 
+            languageSelected = "Portugues";
+
+        if(languageBox.getSelectedItem() == "English") 
+            languageSelected = "English";
+            
+        if(languageBox.getSelectedItem() == "Francais") 
+            languageSelected = "Francais";
+        return languageSelected;
     }
 }
