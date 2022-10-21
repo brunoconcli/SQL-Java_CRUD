@@ -84,20 +84,20 @@ public class LaunchPage implements ActionListener{
         if (e.getSource() == btnInsert) {
             languageSelected = (String)languageBox.getSelectedItem();
             System.out.println("\n" + "Valor recebido da classe LaunchPage: " + languageSelected);
-            new InsertWindow();
+            new InsertWindow(languageSelected);
             
         }
         else if(e.getSource() == btnDelete) {
-            new DeleteWindow();
+            new DeleteWindow(languageSelected);
         }
         else if(e.getSource() == btnAlter) {
-            new AlterWindow();
+            new AlterWindow(languageSelected);
         }
         else if(e.getSource() == btnShowMember) {
-            new SelectWindow();
+            new SelectWindow(languageSelected);
         }
         else if(e.getSource() == btnShowAll) {
-            new SelectAllWindow();
+            new SelectAllWindow(languageSelected);
         }
         else if (e.getSource() == languageBox) {
             languageSelected = (String)languageBox.getSelectedItem();

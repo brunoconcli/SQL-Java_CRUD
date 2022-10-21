@@ -1,6 +1,7 @@
 package Window.memberWindows;
 import BancoDeDados.daos.*;
-// import BancoDeDados.dbos.*;
+import Window.LaunchPage;
+import Window.TextLanguages;
 
 import java.awt.event.*;
 import java.awt.*;
@@ -9,33 +10,52 @@ import javax.swing.*;
 
 public class AlterWindow implements ActionListener {
     JFrame frame = new JFrame();
-    JLabel title_M = new JLabel("Alterar Um Membro");
+
+    TextLanguages lt = new TextLanguages(); //aaaaa sim desce aqui ó  
+
+    JLabel title_M;
     JLabel status_M = new JLabel("Status: ");
 
-    JLabel lbIdMember = new JLabel("Onde IdMember: ");
+    JLabel lbIdMember;
     JTextField txtIdMember = new JTextField();
 
-    JLabel lbIdRocket_M = new JLabel("Novo IdRocket: ");
+    JLabel lbIdRocket_M;
     JTextField txtIdRocket_M = new JTextField();
 
-    JLabel lbMemberName = new JLabel("Novo MemberName: ");
+    JLabel lbMemberName;
     JTextField txtMemberName = new JTextField();
 
-    JButton btnGetAltered_M = new JButton("Alter values");
+    JButton btnGetAltered_M;
     
-    JLabel title_R = new JLabel("Alterar Um Foguete");
+    JLabel title_R;
     JLabel status_R = new JLabel("Status: ");
 
-    JLabel lbIdRocket_R = new JLabel("Onde IdRocket: ");
+    JLabel lbIdRocket_R;
     JTextField txtIdRocket_R = new JTextField();
 
-    JLabel lbRocketName= new JLabel("Novo RocketName: ");
+    JLabel lbRocketName;
     JTextField txtRocketName = new JTextField();
 
-    JButton btnGetAltered_R = new JButton("Alterar Values");
+    JButton btnGetAltered_R;
 
+    String languageSelected = new LaunchPage().languageSelected;
+    // é até qu epouco valor pra passar que ve
+    public AlterWindow(String languageSelected) {
 
-    public AlterWindow() {
+        switchLanguage(languageSelected);
+        title_M = new JLabel(lt.languageBox_Alter[0]);
+        btnGetAltered_M = new JButton(lt.languageBox_Alter[1]);
+
+        lbIdMember = new JLabel(lt.languageBox_Alter[3]);
+        lbIdRocket_M = new JLabel(lt.languageBox_Alter[4]);
+        lbMemberName = new JLabel(lt.languageBox_Alter[5]);
+
+        title_R = new JLabel(lt.languageBox_Alter[2]);
+        btnGetAltered_R = new JButton(lt.languageBox_Alter[1]);
+
+        lbIdRocket_R = new JLabel(lt.languageBox_Alter[10]);
+        lbRocketName = new JLabel(lt.languageBox_Alter[11]);
+        
         title_M.setBounds(10, 5, 350, 30);
         title_M.setFont(new Font("Serif", Font.BOLD, 22));
 
@@ -124,14 +144,13 @@ public class AlterWindow implements ActionListener {
             try {
 
                 if (Integer.parseInt(txtIdMember.getText()) > Members.getLength())  
-                    throw new Exception("<html>" + "O ID inserido não é válido." + "<br>" + 
-                                        "O ID só poderá ser alterado abaixo de " + Members.getLength() +"</html>");
+                    throw new Exception("<html>" + lt.languageBox_Alter[9] + Members.getLength() +"</html>");
                                         
                 Members.alterMember(Integer.parseInt(txtIdRocket_M.getText()), 
                                     txtMemberName.getText(),
                                     Integer.parseInt(txtIdMember.getText())); 
                 
-                status_M.setText("Status: Member alterado com sucesso!");
+                status_M.setText(lt.languageBox_Alter[7]);
                 txtIdMember.setText("");
                 txtIdRocket_M.setText("");
                 txtMemberName.setText("");
@@ -143,11 +162,10 @@ public class AlterWindow implements ActionListener {
         else if(e.getSource() == btnGetAltered_R){
             try{
                 if(Integer.parseInt(txtIdRocket_R.getText()) > Rockets.getLength())
-                    throw new Exception("<html>" + "O ID inserido não é válido." + "<br>" +
-                                        "O  ID só poderá ser alterado abaixo de "+ (Rockets.getLength()) +"</html>");
+                    throw new Exception("<html>" + lt.languageBox_Alter[9] + (Rockets.getLength()) +"</html>");
 
                 Rockets.alterRocket(txtRocketName.getText(),Integer.parseInt(txtIdRocket_R.getText()));
-                status_R.setText("Status: Rocket alterado com sucesso!");
+                status_R.setText(lt.languageBox_Alter[8]);
                 txtIdRocket_R.setText("");
                 txtIdRocket_R.setText("");
             }
@@ -156,4 +174,19 @@ public class AlterWindow implements ActionListener {
             }
         }
 	}
+    public void switchLanguage(String languageSelected) {
+    
+        if (languageSelected == "Portugues") 
+            lt.switchToPortuguese();
+
+        else if(languageSelected == "English") 
+            lt.switchToEnglish();
+        
+        else if(languageSelected == "Francais") 
+            lt.switchToFrancais();
+        
+        for (int i = 0; i < lt.languageBox_Insert.length; i++)
+            System.out.println(lt.languageBox_Insert[i]);
+        System.out.println("\n");
+    }
 }

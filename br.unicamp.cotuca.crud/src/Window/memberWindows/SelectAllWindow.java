@@ -1,5 +1,6 @@
 package Window.memberWindows;
-// import BancoDeDados.daos.*;
+import Window.LaunchPage;
+import Window.TextLanguages;
 
 import java.awt.event.*;
 import java.awt.*;
@@ -8,15 +9,24 @@ import javax.swing.*;
 public class SelectAllWindow implements ActionListener{
     JFrame frame = new JFrame();
 
-    JLabel title_All_M = new JLabel("Selecionar Tabela Member");
-    JLabel title_All_R= new JLabel("Selecionar Tabela Rocket");
+    TextLanguages lt = new TextLanguages();
 
-    JButton btnSelectAll_M = new JButton("Tabela Membros");
+    JLabel title_All_M;
+    JLabel title_All_R;
+
+    JButton btnSelectAll_M;
     JButton btnSelectAll_R = new JButton("Tabela Foguete");
 
     JLabel status_M = new JLabel("Status: ");
     JLabel status_R = new JLabel("Status: ");
-    public SelectAllWindow() {
+    public SelectAllWindow(String languageSelected) {
+        
+        switchLanguage(languageSelected);
+        title_All_M = new JLabel(lt.languageBox_SelectAll[0]);
+        title_All_R = new JLabel(lt.languageBox_SelectAll[1]);
+        btnSelectAll_M = new JButton(lt.languageBox_SelectAll[2]);
+        btnSelectAll_R = new JButton(lt.languageBox_SelectAll[3]);
+
         /*FIRST ROW: MEMBER*/
         title_All_M.setBounds(10, 5, 350, 30);
         title_All_M.setFont(new Font("Serif", Font.BOLD, 22));
@@ -71,5 +81,20 @@ public class SelectAllWindow implements ActionListener{
             }
         }
         
+    }
+    public void switchLanguage(String languageSelected) {
+    
+        if (languageSelected == "Portugues") 
+            lt.switchToPortuguese();
+
+        else if(languageSelected == "English") 
+            lt.switchToEnglish();
+        
+        else if(languageSelected == "Francais") 
+            lt.switchToFrancais();
+        
+        for (int i = 0; i < lt.languageBox_Insert.length; i++)
+            System.out.println(lt.languageBox_Insert[i]);
+        System.out.println("\n");
     }
 }

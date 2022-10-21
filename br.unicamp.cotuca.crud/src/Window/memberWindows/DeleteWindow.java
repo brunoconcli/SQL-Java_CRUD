@@ -1,29 +1,37 @@
 package Window.memberWindows;
 import BancoDeDados.daos.*;
+import Window.TextLanguages;
 
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
 public class DeleteWindow implements ActionListener{
+    TextLanguages lt = new TextLanguages();
+
     JFrame frame = new JFrame();
-    JLabel title_M = new JLabel("Deletar Um Membro");
+    JLabel title_M;
     JLabel status_M = new JLabel("Status: ");
 
     JLabel lbIdMember = new JLabel("IdMember: ");
     JTextField txtIdMember = new JTextField();
 
-    JButton btnGetDeleted_M = new JButton("Delete values");
+    JButton btnGetDeleted_M;
 
-    JLabel title_R = new JLabel("Deletar Um Foguete");
+    JLabel title_R ;
     JLabel status_R = new JLabel("Status: ");
 
     JLabel lbIdRocket = new JLabel("IdRocket: ");
     JTextField txtIdRocket = new JTextField();
 
-    JButton btnGetDeleted_R = new JButton("Delete values");
+    JButton btnGetDeleted_R;
 
-    public DeleteWindow() {
+    public DeleteWindow(String languageSelected) {
+        switchLanguage(languageSelected);
+        title_M = new JLabel(lt.languageBox_Delete[0]);
+        title_R = new JLabel(lt.languageBox_Delete[1]);
+        btnGetDeleted_M = new JButton(lt.languageBox_Delete[2]);
+        btnGetDeleted_R = new JButton(lt.languageBox_Delete[2]);
 
         /* FIRST ROW: MEMBER*/
         title_M.setBounds(10, 5, 350, 30);
@@ -91,12 +99,11 @@ public class DeleteWindow implements ActionListener{
             try {
 
                 if (Integer.parseInt(txtIdMember.getText()) > Members.getLength())  
-                    throw new Exception("<html>" + "O ID inserido não é válido." + "<br>" + 
-                                        "O ID só poderá ser excluído abaixo de " + Members.getLength() +"</html>");
+                    throw new Exception("<html>" + lt.languageBox_Delete[5] + Members.getLength() +"</html>");
 
 
                 Members.deleteMember(Integer.parseInt(txtIdMember.getText()));
-                status_M.setText("Status: " + "" + "excluído com sucesso!");
+                status_M.setText(lt.languageBox_Delete[3]);
             } catch (Exception erro) {
 
                 status_M.setText("<html>Erro: "+ erro.getMessage() + "</html>");
@@ -105,14 +112,28 @@ public class DeleteWindow implements ActionListener{
         else if(e.getSource() == btnGetDeleted_R) {
             try {
                 if(Integer.parseInt(txtIdRocket.getText()) > Rockets.getLength())
-                    throw new Exception("<html>" + "O ID inserido não é válido." + "<br>" +
-                                        "O  ID só poderá ser excluído abaixo de "+ (Rockets.getLength()) +"</html>");
+                    throw new Exception("<html>" + lt.languageBox_Delete[5] + (Rockets.getLength()) +"</html>");
                 
                 Rockets.deleteRocket(Integer.parseInt(txtIdRocket.getText()));
-                status_R.setText("Status: Rocket excluído com sucesso!");
+                status_R.setText(lt.languageBox_Delete[4]);
             } catch (Exception erro) {
                 status_R.setText("<html>Erro: "+ erro.getMessage() + "</html>");
             }
         }
+    }
+    public void switchLanguage(String languageSelected) {
+    
+        if (languageSelected == "Portugues") 
+            lt.switchToPortuguese();
+
+        else if(languageSelected == "English") 
+            lt.switchToEnglish();
+        
+        else if(languageSelected == "Francais") 
+            lt.switchToFrancais();
+        
+        for (int i = 0; i < lt.languageBox_Insert.length; i++)
+            System.out.println(lt.languageBox_Insert[i]);
+        System.out.println("\n");
     }
 }

@@ -37,14 +37,10 @@ public class InsertWindow implements ActionListener {
     JButton btnGetInserted_R;
 
     String languageSelected = new LaunchPage().languageSelected;
-    JButton changeLanguage = new JButton("Aqui ó");
     
-    public InsertWindow() {
+    public InsertWindow(String languageSelected) {
 
-        System.out.println(new LaunchPage().switchSelected());
-        System.out.println("Valor instanciado na classe InsertWindow: " + languageSelected + "\n");
         switchLanguage(languageSelected);
-
 
         /* TEXT DEFINITION */
         title_M = new JLabel(lt.languageBox_Insert[0]);
@@ -78,10 +74,7 @@ public class InsertWindow implements ActionListener {
         btnGetInserted_M.setFocusable(false);
         btnGetInserted_M.addActionListener(this);
 
-        changeLanguage.setBounds(200, 70, 50, 25);
-        changeLanguage.setFocusable(false);
-        changeLanguage.addActionListener(this);
-        frame.add(changeLanguage);
+        
 
         frame.add(lbIdMember);
         frame.add(lbIdRocket_M);
@@ -140,31 +133,26 @@ public class InsertWindow implements ActionListener {
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize(); 
         frame.setLocation(((d.width - frame.getWidth())/2), ((d.height - frame.getHeight())/3)); 
     }
-    public void verifyInputs() {
-        if (txtMemberName.getText() == "Bruno") {
-            System.out.println("Bruno is now set for the master pilot of the spaceshift");
-        }
-    }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnGetInserted_M) {
             try {
                 
                 if (Integer.parseInt(txtIdMember.getText()) <= Members.getLength()) 
-                    throw new Exception("<html>O ID inserido já existe." + "<br>" +" O próximo ID deve ser de "+(Members.getLength() + 1) + "</html>");
+                    throw new Exception("<html>"+ lt.languageBox_Insert[3] + (Members.getLength() + 1) + "</html>");
                     
                 if (Integer.parseInt(txtIdMember.getText()) != Members.getLength() + 1) 
-                    throw new Exception("<html>O valor inserido é inválido." + "<br>" +" O próximo ID deve ser de "+(Members.getLength() + 1) + "</html>");
+                    throw new Exception("<html>" + lt.languageBox_Insert[4] + (Members.getLength() + 1) + "</html>");
                 
                     
                 Members.insertMember (new Member (Integer.parseInt(txtIdMember.getText()), 
                                                   Integer.parseInt(txtIdRocket_M.getText()), 
                                                   txtMemberName.getText()));
-                status_M.setText("Status: Member inserido com sucesso!");
+                status_M.setText(lt.languageBox_Insert[5]);
             }
             catch (Exception erro) {
-                status_M.setText("<html>Erro: "+ erro.getMessage() + "</html>");
+                status_M.setText("<html>" + erro.getMessage() + "</html>");
 
             }
 
@@ -177,43 +165,25 @@ public class InsertWindow implements ActionListener {
                 title_R.setText(lt.languageBox_Insert[2]);
                 btnGetInserted_R.setText(lt.languageBox_Insert[1]);
 
-
                 if(Integer.parseInt(txtIdRocket_R.getText()) <= Rockets.getLength())
-                    throw new Exception("<html>O ID inserido já existe." + "<br>" +" O próximo ID deve ser de "+(Rockets.getLength() + 1) + "</html>");
+                    throw new Exception("<html>" + lt.languageBox_Insert[3] + (Rockets.getLength() + 1) + "</html>");
+
                 if(Integer.parseInt(txtIdRocket_R.getText())!= Rockets.getLength() + 1)
-                    throw new Exception("<html>O valor inserido é inválido." + "<br>" +" O próximo ID deve ser de "+(Rockets.getLength() + 1) + "</html>");
+                    throw new Exception("<html>"+ lt.languageBox_Insert[3] + (Rockets.getLength() + 1) + "</html>");
+
                 Rockets.insertRocket(new Rocket(Integer.parseInt(txtIdRocket_R.getText()), txtRocketName.getText()));
-                status_R.setText("Status: Rocket inserido com sucesso!");
+                status_R.setText(lt.languageBox_Insert[6]);
 
             } 
             catch (Exception erro) {
                 status_R.setText("<html>Erro: "+ erro.getMessage() + "</html>");
             }
         }
-        else if (e.getSource() == changeLanguage) {
-            try {
-                languageSelected = "English";
-                switchLanguage(languageSelected);
-                applyText();
-            
-            } catch (Exception erro) {
-                System.out.println("Não pode!");
-            }
-
-        }
         
     }
 
-    public void applyText() {
-
-        title_M.setText(lt.languageBox_Insert[0]);
-        btnGetInserted_M.setText(lt.languageBox_Insert[1]);
-        title_R.setText(lt.languageBox_Insert[2]);
-        btnGetInserted_R.setText(lt.languageBox_Insert[1]);
-
-        // for (int i = 0; i < lt.languageBox_LaunchPage.length; i++)
-        //     System.out.println(lt.languageBox_Insert[i]);
-    }
+       //     System.out.println(lt.languageBox_Insert[i]);
+    
 
     public void switchLanguage(String languageSelected) {
         

@@ -1,5 +1,7 @@
 package Window.memberWindows;
 import BancoDeDados.daos.*;
+import Window.LaunchPage;
+import Window.TextLanguages;
 
 import java.awt.event.*;
 import java.awt.*;
@@ -7,23 +9,32 @@ import javax.swing.*;
 
 public class SelectWindow implements ActionListener{
     JFrame frame = new JFrame();
-    JLabel title_M = new JLabel("Selecionar Um Membro");
+
+    TextLanguages lt = new TextLanguages();
+    
+    JLabel title_M;
     JLabel status_M = new JLabel("Status: ");
 
     JLabel lbIdMember = new JLabel("IdMember: ");
     JTextField txtIdMember = new JTextField();
 
-    JButton btnGetSelected_M = new JButton("Mostrar");
+    JButton btnGetSelected_M;
 
-    JLabel title_R = new JLabel("Selecionar Um Foguete");
+    JLabel title_R;
     JLabel status_R = new JLabel("Status: ");
 
     JLabel lbIdRocket = new JLabel("IdRocket: ");
     JTextField txtIdRocket = new JTextField();
 
-    JButton btnGetSelected_R = new JButton("Mostrar");
+    JButton btnGetSelected_R;
 
-    public SelectWindow() {
+    public SelectWindow(String languageSelected) {
+
+        switchLanguage(languageSelected);
+        title_M = new JLabel(lt.languageBox_Select[0]);
+        title_R = new JLabel(lt.languageBox_Select[1]);
+        btnGetSelected_M = new JButton(lt.languageBox_Select[2]);
+        btnGetSelected_R = new JButton(lt.languageBox_Select[2]);
 
         /* FIRST ROW: MEMBER*/
         title_M.setBounds(10, 5, 350, 30);
@@ -93,8 +104,7 @@ public class SelectWindow implements ActionListener{
             try {
 
                 if (Integer.parseInt(txtIdMember.getText()) > Members.getLength())  
-                    throw new Exception("<html>" + "O ID inserido não é válido." + "<br>" + 
-                                        "O ID só poderá ser exibido abaixo de " + Members.getLength() +"</html>");
+                    throw new Exception("<html>" + lt.languageBox_Select[3] + Members.getLength() +"</html>");
 
                 status_M.setText("<html>Status: " + Members.getMember(Integer.parseInt(txtIdMember.getText())) + "</html>");
                 
@@ -106,8 +116,7 @@ public class SelectWindow implements ActionListener{
             try {
 
                 if (Integer.parseInt(txtIdRocket.getText()) > Rockets.getLength())  
-                    throw new Exception("<html>" + "O ID inserido não é válido." + "<br>" + 
-                                        "O ID só poderá ser exibido abaixo de " + Rockets.getLength() +"</html>");
+                    throw new Exception("<html>" + lt.languageBox_Select[3] + Rockets.getLength() +"</html>");
 
                 status_R.setText("<html> Status: " + Rockets.getRocket(Integer.parseInt(txtIdRocket.getText())) + "</html>");
 
@@ -116,5 +125,20 @@ public class SelectWindow implements ActionListener{
                 
             }
         }
+    }
+    public void switchLanguage(String languageSelected) {
+    
+        if (languageSelected == "Portugues") 
+            lt.switchToPortuguese();
+
+        else if(languageSelected == "English") 
+            lt.switchToEnglish();
+        
+        else if(languageSelected == "Francais") 
+            lt.switchToFrancais();
+        
+        for (int i = 0; i < lt.languageBox_Insert.length; i++)
+            System.out.println(lt.languageBox_Insert[i]);
+        System.out.println("\n");
     }
 }
